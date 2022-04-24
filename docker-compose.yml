@@ -34,11 +34,12 @@ services:
     user: root
 
   db:
-    image: mysql:5.7
+    image: mysql/mysql-server:5.7.37
     command: ["--bind-address=0.0.0.0"]
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       TZ: Asia/Tokyo
+      MYSQL_ROOT_HOST: '%'
     volumes:
       - db:/var/lib/mysql
     ports:
@@ -82,6 +83,8 @@ services:
       #  bin/elasticsearch-plugin install analysis-icu &&
       #  docker-entrypoint.sh"
     expose: [ "9200" ]
+    ports:
+      - "9200:9200"
 
 volumes:
   bundle:

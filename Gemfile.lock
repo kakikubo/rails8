@@ -355,8 +355,6 @@ GEM
     simplecov-html (0.12.3)
     simplecov-lcov (0.8.0)
     simplecov_json_formatter (0.1.2)
-    skylight (5.3.2)
-      activesupport (>= 5.2.0)
     spring (4.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -430,7 +428,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   sass-rails (>= 6)
-  searchkick (~> 5.0.3)
+  searchkick
   selenium-webdriver
   sidekiq
   simplecov

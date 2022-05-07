@@ -77,7 +77,10 @@ services:
       http.host: "0.0.0.0"
       http.port: "9200"
       discovery.type: "single-node"
+      transport.host: "0.0.0.0"
+      network_mode: "host"
       ES_JAVA_OPTS: '-Xms256m -Xmx256m'
+      xpack.security.enabled: false
       #entrypoint: >
       #  bash -c "bin/elasticsearch-plugin install analysis-kuromoji &&
       #  bin/elasticsearch-plugin install analysis-icu &&

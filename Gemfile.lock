@@ -323,8 +323,6 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     rubocop-rspec (2.9.0)
       rubocop (~> 1.19)
-    ruby-debug-ide (0.7.3)
-      rake (>= 0.8.1)
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -359,8 +357,6 @@ GEM
     simplecov-html (0.12.3)
     simplecov-lcov (0.8.0)
     simplecov_json_formatter (0.1.2)
-    skylight (5.3.1)
-      activesupport (>= 5.2.0)
     spring (4.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -433,14 +429,12 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
-  ruby-debug-ide
   sass-rails (>= 6)
   searchkick (~> 5.0.3)
   selenium-webdriver
   sidekiq
   simplecov
   simplecov-lcov
-  skylight
   spring
   turbolinks (~> 5)
   tzinfo-data

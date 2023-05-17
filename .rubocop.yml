@@ -3,6 +3,9 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-performance
   - rubocop-rails
+  - rubocop-capybara
+  - rubocop-rspec
+  - rubocop-factory_bot
 
 #AllCops:
 #  DisabledByDefault: true
@@ -40,4 +43,3 @@ Metrics/MethodLength:
 Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20210324220117_create_active_storage_tables.active_storage.rb'
-

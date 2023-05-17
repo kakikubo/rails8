@@ -10,10 +10,12 @@ RSpec.describe 'Statuses', type: :request do
       it '成功のステータスが返ること' do
         expect(response.status).to eq 200
       end
+
       it 'レスポンスにjsonでokが入っていること' do
         json = JSON.parse(response.body)
         expect(json['status']).to eq 'ok'
       end
+
       it 'content-typeがapplication/jsonになっていること' do
         expect(response.media_type).to eq 'application/json'
       end

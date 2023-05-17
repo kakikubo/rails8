@@ -6,6 +6,7 @@ RSpec.describe Ticket, type: :model do
   describe 'validation' do
     let(:user) { create(:user) }
     let(:event) { create(:event) }
+
     context '正常系' do
       it 'バリデーションを通過すること' do
         ticket = described_class.new(
@@ -15,6 +16,7 @@ RSpec.describe Ticket, type: :model do
         )
         expect(ticket).to be_valid
       end
+
       it 'ユーザが紐付いていなくてもバリデーションは通過すること' do
         ticket = described_class.new(
           user: nil,
@@ -24,6 +26,7 @@ RSpec.describe Ticket, type: :model do
         expect(ticket).to be_valid
       end
     end
+
     context '異常系' do
       it 'バリデーションを通過しないこと' do
         ticket = described_class.new(

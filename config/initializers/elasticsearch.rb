@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 config = {
   host: 'http://elasticsearch:9200/'
 }

@@ -22,7 +22,7 @@ services:
       HISTFILE: '/work/app/log/.bash_history'
       TZ: 'Asia/Tokyo'
       RAILS_ENV: ${RAILS_ENV:-development}
-      DATABASE_URL: 'mysql2://root:@db'
+      DATABASE_URL: <%= $DATABASE_URL || 'mysql2://root:@db' -%>
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       ELASTIC_SEARCH_URL: ${ELASTIC_SEARCH_URL:-http://elasticsearch:9200}
       BUNDLER_VERSION: '2.4.8'

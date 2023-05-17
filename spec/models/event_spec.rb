@@ -12,6 +12,15 @@ RSpec.describe Event, type: :model do
       end
     end
 
+    context '画像が指定されている場合' do
+      let(:event) { build(:event) }
+
+      it 'イベントが作成されること' do
+        expect(event).to be_valid
+        expect(event.errors[:image]).not_to eq(['を入力してください'])
+      end
+    end
+
     context '画像が指定されていない場合' do
       let(:event) { build(:event, image: nil) }
 

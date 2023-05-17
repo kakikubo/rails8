@@ -1,10 +1,62 @@
-FROM cimg/ruby:3.1.0-browsers
-RUN sudo apt-get update -qq && sudo apt-get install -y libvips-dev
-#RUN sudo mkdir -p /home/circleci
-WORKDIR /home/circleci
-COPY Gemfile /home/circleci/Gemfile
-COPY Gemfile.lock /home/circleci/Gemfile.lock
-RUN sudo bundle install --full-index
-COPY . /home/circleci
+# ビルド用コンテナ
+ARG IMAGE_FILE
+FROM $IMAGE_FILE:3.2.1-alpine3.171 AS builder
+RUN apk --update --no-cache add --virtual build-dependencies \
+    build-base \
+    git \
+    make \
+    gcc \
+    g++ \
+    gcompat \
+    zlib-dev \
+    libffi-dev \
+    readline-dev \
+    libxml2-dev \
+    libxslt-dev
+RUN apk --update --no-cache add \
+    bash \
+    yarn \
+    mariadb-client \
+    mariadb-dev \
+    imagemagick \
+    tzdata
+ENV APP_PATH /work/app
+WORKDIR $APP_PATH
 
-ENV LANG C.UTF-8
+COPY Gemfile $APP_PATH
+COPY Gemfile.lock $APP_PATH
+RUN gem update bundler \
+    && bundle config set force_ruby_platform true \
+    && bundle install --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3 \
+    && apk del build-dependencies # --virtual でグルーピングしたpackageを削除
+RUN rm -rf /usr/local/bundle/cache/*
+
+FROM ${IMAGE_FILE}:3.2.1-alpine3.17
+    RUN apk --no-cache add \
+    build-base \
+    bash \
+    file \
+    make \
+    curl \
+    gcompat \
+    gcc \
+    libffi-dev \
+    yarn \
+    readline-dev \
+    libxml2-dev \
+    libxslt-dev \
+    nodejs \
+    mariadb-client \
+    mariadb-dev \
+    nodejs \
+    npm \
+    imagemagick  \
+    tzdata
+RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+ENV APP_PATH /work/app
+WORKDIR $APP_PATH
+COPY . $APP_PATH
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+
+CMD ["bin/rails", "s"]

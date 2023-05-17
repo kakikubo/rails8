@@ -78,3 +78,9 @@ yarn-debug.log*
 /.idea/*
 .DS_Store
 .rubygems
+
+.envrc
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
+aws_credentials.txt

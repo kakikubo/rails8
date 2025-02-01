@@ -26,19 +26,19 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: root
-      # elasticsearch:
-      #   # image: elasticsearch:7.17.9
-      #   image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
-      #   ports:
-      #     - 9200:9200
-      #   env:
-      #     discovery.type: single-node
-      #   options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-      #   options: >-
-      #     --health-cmd 'curl http://localhost:9200/_cluster/health'
-      #     --health-interval 10s
-      #     --health-timeout 5s
-      #     --health-retries 3
+      elasticsearch:
+        # image: elasticsearch:7.17.9
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.17.1
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+        options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+        # options: >-
+        #   --health-cmd 'curl http://localhost:9200/_cluster/health'
+        #   --health-interval 10s
+        #   --health-timeout 5s
+        #   --health-retries 3
       # 起動数が多すぎるせいか rspec が動かなくなるので一旦停止させたサービス
 
     # https://github.com/ruby/setup-ruby

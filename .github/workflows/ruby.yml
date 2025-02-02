@@ -79,8 +79,8 @@ jobs:
         with:
           stack-version: 8.17.1
           plugins: |
-            analysis-kuromoji@8.17.1
-            analysis-icu@8.17.1
+            analysis-kuromoji
+            analysis-icu
       #MySQLをインストール
       - name: Install dependent libralies
         run: sudo apt-get update -y && sudo apt-get install libmysqlclient-dev

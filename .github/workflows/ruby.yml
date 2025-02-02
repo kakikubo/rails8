@@ -73,14 +73,14 @@ jobs:
           sudo sysctl -w vm.swappiness=1
           sudo sysctl -w fs.file-max=262144
           sudo sysctl -w vm.max_map_count=262144
-      - name: Run Elasticsearch
-        # uses: perfect-ruby-on-rails/elasticsearch-with-plugins-action@v1
-        uses: elastic/elastic-github-actions/elasticsearch@master
-        with:
-          stack-version: 8.17.1
-          plugins: |
-            analysis-kuromoji
-            analysis-icu
+      #- name: Run Elasticsearch
+      #  # uses: perfect-ruby-on-rails/elasticsearch-with-plugins-action@v1
+      #  uses: elastic/elastic-github-actions/elasticsearch@master
+      #  with:
+      #    stack-version: 8.17.1
+      #    plugins: |
+      #      analysis-kuromoji
+      #      analysis-icu
       #MySQLをインストール
       - name: Install dependent libralies
         run: sudo apt-get update -y && sudo apt-get install libmysqlclient-dev

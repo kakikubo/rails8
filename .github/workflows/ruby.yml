@@ -32,7 +32,7 @@ jobs:
           - 9200:9200
         env:
           discovery.type: single-node
-          ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+          ES_JAVA_OPTS: "-Xms1g -Xmx1g"
         options: --health-cmd="curl -fsSL http://localhost:9200/_cluster/health || exit 1" --health-interval=10s --health-timeout=5s --health-retries=10
       # 起動数が多すぎるせいか rspec が動かなくなるので一旦停止させたサービス
 
@@ -70,7 +70,7 @@ jobs:
         uses: perfect-ruby-on-rails/elasticsearch-with-plugins-action@v1
         #  uses: elastic/elastic-github-actions/elasticsearch@master
         with:
-          stack-version: 7.17.9
+          stack-version: 8.17.1
           plugins: |
             analysis-kuromoji
             analysis-icu

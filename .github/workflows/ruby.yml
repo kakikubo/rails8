@@ -33,7 +33,14 @@ jobs:
         env:
           discovery.type: single-node
           ES_JAVA_OPTS: "-Xms1g -Xmx1g"
-        options: --health-cmd="curl -fsSL http://localhost:9200/_cluster/health || exit 1" --health-interval=10s --health-timeout=5s --health-retries=10
+          xpack.security.enabled: false
+          bootstrap.memory_lock: true
+        options: >-
+          --health-cmd "curl --silent --fail localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --health-start-period 20s
       # 起動数が多すぎるせいか rspec が動かなくなるので一旦停止させたサービス
 
     # https://github.com/ruby/setup-ruby
@@ -72,8 +79,8 @@ jobs:
         with:
           stack-version: 8.17.1
           plugins: |
-            analysis-kuromoji
-            analysis-icu
+            analysis-kuromoji@8.17.1
+            analysis-icu@8.17.1
       #MySQLをインストール
       - name: Install dependent libralies
         run: sudo apt-get update -y && sudo apt-get install libmysqlclient-dev
